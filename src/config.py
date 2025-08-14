@@ -1,3 +1,6 @@
+"""
+Configuration settings for the Research Brief Generator.
+"""
 import os
 from typing import Optional
 from dotenv import load_dotenv
@@ -11,6 +14,7 @@ class Config:
     # API Keys
     GEMINI_API_KEY: Optional[str] = os.getenv("GEMINI_API_KEY")
     GOOGLE_API_KEY: Optional[str] = os.getenv("GOOGLE_API_KEY")  # Alternative name
+    SERPER_API_KEY: Optional[str] = os.getenv("SERPER_API_KEY")  # For web search
     
     # Model Configuration
     GEMINI_MODEL: str = "gemini-1.5-flash"
@@ -21,6 +25,9 @@ class Config:
     # Search Configuration
     MAX_SEARCH_RESULTS: int = 10
     SEARCH_TIMEOUT: int = 30
+    SERPER_SEARCH_TYPE: str = "search"  # Options: search, news, images, videos
+    SERPER_GL: str = "us"  # Geolocation
+    SERPER_HL: str = "en"  # Host language
     
     # Workflow Configuration
     MAX_CONTEXT_SUMMARIZATION_ATTEMPTS: int = 3
@@ -40,23 +47,33 @@ class Config:
     BRIEF_HISTORY_FILE: str = "brief_history.json"
     
     @classmethod
-    def get_api_key(cls) -> str:
-        """Get the API key, trying both environment variable names."""
+    def get_gemini_api_key(cls) -> str:
+        """Get the Gemini API key, trying both environment variable names."""
         api_key = cls.GEMINI_API_KEY or cls.GOOGLE_API_KEY
         if not api_key:
             raise ValueError(
-                "No API key found. Please set GEMINI_API_KEY or GOOGLE_API_KEY environment variable."
+                "No Gemini API key found. Please set GEMINI_API_KEY or GOOGLE_API_KEY environment variable."
             )
         return api_key
+    
+    @classmethod
+    def get_serper_api_key(cls) -> Optional[str]:
+        """Get the Serper API key for web search."""
+        return cls.SERPER_API_KEY
     
     @classmethod
     def validate_config(cls) -> bool:
         """Validate that required configuration is present."""
         try:
-            cls.get_api_key()
+            cls.get_gemini_api_key()
             return True
         except ValueError:
             return False
+    
+    @classmethod
+    def has_serper_key(cls) -> bool:
+        """Check if Serper API key is available for real web search."""
+        return bool(cls.get_serper_api_key())
 
 # Global config instance
 config = Config()
