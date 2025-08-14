@@ -23,11 +23,11 @@ For the latest updates and detailed documentation, visit our [GitHub repository]
 - **🧠 AI-Powered Research**: Uses Google's Gemini 1.5 Flash model for intelligent content generation
 - **🔄 LangGraph Orchestration**: Implements a robust workflow with distinct nodes for each processing step
 - **📊 Structured Output**: All outputs follow strict schemas using Pydantic validation
-- **🔍 Web Search Integration**: Automatically searches and analyzes relevant web content
+- **🔍 Web Search Integration**: Real-time web search using Serper API for accurate and up-to-date information
 - **💭 Context Awareness**: Supports follow-up queries with previous interaction context
 - **🌐 Multiple Interfaces**: CLI, Web UI (Flask), and REST API (FastAPI)
 - **✅ Comprehensive Testing**: Unit tests and CI/CD pipeline integration
-- **📈 Observability**: LangSmith tracing support for monitoring executions
+- **📈 Observability**: LangSmith tracing support for monitoring LangChain executions and debugging
 
 
 ## 🏗️ Architecture
@@ -36,7 +36,7 @@ The system uses **LangGraph** for workflow orchestration with the following node
 
 1. **Context Summarization**: Analyzes previous user interactions
 2. **Planning**: Creates research strategy and search queries
-3. **Search**: Executes web searches for relevant information
+3. **Search**: Executes web searches using Serper API for real-time information
 4. **Content Fetching**: Retrieves and processes source content
 5. **Synthesis**: Combines all research into a structured brief
 6. **Post-Processing**: Final validation and formatting
@@ -47,7 +47,7 @@ The system uses **LangGraph** for workflow orchestration with the following node
 graph TD
     A[Start] --> B[Context Summarization]
     B --> C[Planning] 
-    C --> D[Search]
+    C --> D[Search via Serper API]
     D --> E[Content Fetching]
     E --> F[Synthesis]
     F --> G[Post-Processing]
@@ -67,13 +67,28 @@ graph TD
 - Python 3.9+ (Python 3.13.2 recommended)
 - Visual Studio Code (optional but recommended)
 - Gemini API Key (free tier available)
+- Serper API Key for web search (free tier: 1,000 searches/month)
+- LangSmith API Key (optional, for tracing and debugging)
 
-### 1. Get Your Free Gemini API Key
+### 1. Get Your API Keys
 
+#### Gemini API Key (Required)
 1. Visit [Google AI Studio](https://ai.google.dev/)
 2. Sign in with your Google account
 3. Click "Get API Key" → "Create API Key"
 4. Copy your API key
+
+#### Serper API Key (Required for Web Search)
+1. Visit [Serper.dev](https://serper.dev/)
+2. Sign up for a free account
+3. Navigate to your dashboard
+4. Copy your API key (1,000 free searches/month)
+
+#### LangSmith API Key (Optional - for Tracing)
+1. Visit [LangSmith](https://smith.langchain.com/)
+2. Sign up for a free account
+3. Create a new project
+4. Copy your API key from settings
 
 ### 2. Installation
 
@@ -97,7 +112,7 @@ pip install -r requirements.txt
 # Setup environment
 cp .env.example .env
 # Edit .env and add:
-GEMINI_API_KEY=your_api_key_here_from_google_ai_studio
+GEMINI_API_KEY=your_gemini_api_key_here
 SERPER_API_KEY=your_serper_api_key_here
 GEMINI_MODEL=gemini-1.5-flash
 TEMPERATURE=0.7
@@ -111,9 +126,9 @@ FLASK_SECRET_KEY=your_secret_key_here_change_in_production
 FASTAPI_HOST=0.0.0.0
 FASTAPI_PORT=8000
 BRIEF_HISTORY_FILE=brief_history.json
-LANGSMITH_API_KEY=
+LANGSMITH_API_KEY=your_langsmith_api_key_here
 LANGSMITH_TRACING=true
-LANGSMITH_PROJECT=
+LANGSMITH_PROJECT=research-brief-generator
 MAX_SEARCH_RESULTS=10
 SEARCH_TIMEOUT=30
 SERPER_SEARCH_TYPE=search
@@ -298,6 +313,7 @@ Copy `.env.example` to `.env` and configure:
 ```bash
 # Required
 GEMINI_API_KEY=your_gemini_api_key_here
+SERPER_API_KEY=your_serper_api_key_here
 
 # Optional
 GEMINI_MODEL=gemini-1.5-flash
@@ -305,6 +321,18 @@ TEMPERATURE=0.7
 MAX_RETRIES=3
 FLASK_PORT=5000
 FASTAPI_PORT=8000
+
+# LangSmith (Optional - for tracing)
+LANGSMITH_API_KEY=your_langsmith_api_key_here
+LANGSMITH_TRACING=true
+LANGSMITH_PROJECT=research-brief-generator
+
+# Serper Configuration
+SERPER_SEARCH_TYPE=search
+SERPER_GL=us
+SERPER_HL=en
+MAX_SEARCH_RESULTS=10
+SEARCH_TIMEOUT=30
 ```
 
 ### Model Selection
@@ -382,6 +410,7 @@ git push heroku main
 
 # Set environment variables
 heroku config:set GEMINI_API_KEY=your_api_key_here
+heroku config:set SERPER_API_KEY=your_serper_api_key_here
 ```
 
 #### Cloud Platform Deployment
@@ -430,20 +459,50 @@ class FinalBrief(BaseModel):
 
 ## 🔍 Observability and Monitoring
 
-### LangSmith Integration
+### LangSmith Integration for LangChain Tracing
 
-Enable tracing by setting environment variables:
+Enable comprehensive tracing and debugging of your LangChain workflows:
 
 ```bash
+# Set in your .env file
 LANGSMITH_API_KEY=your_langsmith_key
 LANGSMITH_TRACING=true
 LANGSMITH_PROJECT=research-brief-generator
 ```
 
+**LangSmith Features:**
+- **Execution Tracing**: Monitor every step of your LangGraph workflow
+- **Token Usage Tracking**: See exact token consumption per node
+- **Performance Analytics**: Identify bottlenecks and optimization opportunities
+- **Error Debugging**: Detailed error traces with context
+- **A/B Testing**: Compare different model configurations
+- **Dataset Management**: Create test datasets for evaluation
+
+### Serper API Integration
+
+Real-time web search capabilities powered by Google Search:
+
+```bash
+# Serper Configuration in .env
+SERPER_API_KEY=your_serper_api_key
+SERPER_SEARCH_TYPE=search  # Options: search, images, videos, places, maps
+SERPER_GL=us               # Geographic location
+SERPER_HL=en              # Language
+MAX_SEARCH_RESULTS=10     # Number of results per query
+```
+
+**Serper Benefits:**
+- **Fresh Data**: Real-time Google search results
+- **Cost Effective**: 1,000 free searches per month
+- **Fast Response**: Sub-second search results
+- **Rich Metadata**: Titles, snippets, and structured data
+- **Multiple Search Types**: Web, images, videos, places
+
 ### Performance Metrics
 
-- **Token Usage**: Tracked per execution
+- **Token Usage**: Tracked per execution via LangSmith
 - **Latency**: Node-level and total execution time
+- **Search Performance**: Query response times and result quality
 - **Success Rate**: Workflow completion statistics
 - **Error Tracking**: Detailed error logs and retry counts
 
@@ -451,11 +510,16 @@ LANGSMITH_PROJECT=research-brief-generator
 
 ### Common Issues
 
-1. **API Key Error**
+1. **API Key Errors**
    ```bash
    ❌ No API key found. Please set GEMINI_API_KEY environment variable.
    ```
    **Solution**: Set your Gemini API key in `.env` file
+
+   ```bash
+   ❌ Serper API key not configured
+   ```
+   **Solution**: Add `SERPER_API_KEY=your_key_here` to `.env` file
 
 2. **Import Errors** 
    ```bash
@@ -463,7 +527,19 @@ LANGSMITH_PROJECT=research-brief-generator
    ```
    **Solution**: Install dependencies with `pip install -r requirements.txt`
 
-3. **Port Already in Use**
+3. **Search API Rate Limits**
+   ```bash
+   ❌ Serper API rate limit exceeded
+   ```
+   **Solution**: Check your usage at serper.dev dashboard or upgrade plan
+
+4. **LangSmith Connection Issues**
+   ```bash
+   ❌ LangSmith tracing failed to initialize
+   ```
+   **Solution**: Verify `LANGSMITH_API_KEY` is correct and set `LANGSMITH_TRACING=false` to disable
+
+5. **Port Already in Use**
    ```bash
    ❌ OSError: [Errno 98] Address already in use
    ```
@@ -471,10 +547,12 @@ LANGSMITH_PROJECT=research-brief-generator
 
 ### Debug Mode
 
-Enable verbose logging:
+Enable verbose logging and LangSmith tracing:
 ```bash
 python main.py --topic "Your topic" --verbose --debug
 ```
+
+Check LangSmith dashboard for detailed execution traces at: https://smith.langchain.com
 
 ## 📈 Cost and Latency Benchmarks
 
@@ -488,29 +566,38 @@ python main.py --topic "Your topic" --verbose --debug
   - Depth 3: ~8,000 tokens 
   - Depth 5: ~15,000 tokens
 
+### Serper API (Free Tier)
+
+- **Rate Limits**: 1,000 searches per month
+- **Average Latency**: 200-500ms per search
+- **Concurrent Searches**: Up to 10 simultaneous requests
+- **Search Quality**: Google-quality results with rich metadata
+
 ### Performance Optimization
 
 - Use **depth level 3** for optimal speed/quality balance
 - Enable **streaming** for real-time progress updates
 - Implement **caching** for repeated queries
 - Use **checkpointing** for long-running workflows
+- Monitor performance via **LangSmith dashboard**
 
 ## 🔒 Limitations and Areas for Improvement
 
 ### Current Limitations
 
-1. **Search Integration**: Currently uses simulated search results for demonstration
+1. **Search Rate Limits**: Free tier Serper API provides 1,000 searches/month
 2. **Language Support**: Optimized for English content
 3. **Source Verification**: Limited fact-checking capabilities
 4. **Scale**: Single-user focused, not designed for high-volume concurrent usage
 
 ### Areas for Improvement
 
-1. **Real Search APIs**: Integrate Tavily, SerpAPI, or Google Custom Search
+1. **Enhanced Search**: Multiple search provider fallbacks (Tavily, SerpAPI backup)
 2. **Multi-language**: Support for non-English research topics
 3. **Advanced Filtering**: Source credibility scoring and filtering
 4. **Collaborative Features**: Multi-user workspaces and sharing
 5. **Export Options**: PDF generation and formatted reports
+6. **Caching Layer**: Redis integration for search result caching
 
 ## 🤝 Contributing
 
@@ -540,8 +627,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **LangChain Team** for the excellent LangGraph framework
+- **LangChain Team** for the excellent LangGraph framework and LangSmith tracing platform
 - **Google AI** for providing free-tier access to Gemini models
+- **Serper.dev** for reliable and fast web search API
 - **Pydantic Team** for robust data validation
 - **Flask and FastAPI** communities for excellent web frameworks
 
@@ -550,6 +638,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Documentation**: Check this README and inline code comments
 - **Issues**: Open a GitHub issue for bugs or feature requests
 - **Discussions**: Use GitHub Discussions for questions and ideas
+- **LangSmith Support**: Visit [LangSmith Documentation](https://docs.smith.langchain.com/)
+- **Serper Support**: Check [Serper Documentation](https://serper.dev/docs)
 
 ## 🔗 Related Projects
 
@@ -557,9 +647,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [LangChain Google GenAI](https://python.langchain.com/docs/integrations/chat/google_generative_ai)
 - [Gemini API Documentation](https://ai.google.dev/docs)
 - [Pydantic Documentation](https://pydantic.dev/)
+- [Serper API Documentation](https://serper.dev/docs)
+- [LangSmith Tracing Guide](https://docs.smith.langchain.com/)
 
 ---
 
-**Built with ❤️ using LangGraph, Gemini 1.5 Flash, and Python**
-
-
+**Built with ❤️ using LangGraph, Gemini 1.5 Flash, Serper API, LangSmith, and Python**
