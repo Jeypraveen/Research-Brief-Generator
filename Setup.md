@@ -62,9 +62,6 @@ SEARCH_TIMEOUT=30
 SERPER_SEARCH_TYPE=search
 SERPER_GL=us
 SERPER_HL=en
-
-
-
 ```
 
 ### 5. Test Installation
