@@ -15,6 +15,10 @@ A sophisticated research assistant system that generates structured, evidence-li
 - **✅ Comprehensive Testing**: Unit tests and CI/CD pipeline integration
 - **📈 Observability**: LangSmith tracing support for monitoring executions
 
+## Video Sample for API URL with sample request and response, Click below drive link to view.
+https://drive.google.com/file/d/1ct7iF23WVR9J1nlq9y08tI6ZrCi_RlR3/view?usp=drive_link
+
+
 ## Photo Samples
 For the latest updates and detailed documentation, visit our [GitHub repository](https://github.com/Jeypraveen/Research-Brief-Generator).
 <img width="1024" height="1024" alt="Image" src="https://github.com/user-attachments/assets/c2711949-613e-4793-b8a6-1c2f960ebf75" />
@@ -23,13 +27,6 @@ For the latest updates and detailed documentation, visit our [GitHub repository]
 <img width="1918" height="1198" alt="Image" src="https://github.com/user-attachments/assets/a0d8bf28-fb58-4257-a309-294d22ba794b" />
 <img width="1095" height="617" alt="Image" src="https://github.com/user-attachments/assets/290ba216-bfe7-4533-846d-5c245b3e14dd" />
 ![Image](https://github.com/user-attachments/assets/8560e45b-7602-4528-a533-3da6c5c2a612)
-
-## Video Sample for API URL with sample request and response, Click below drive link to view.
-https://drive.google.com/file/d/1ct7iF23WVR9J1nlq9y08tI6ZrCi_RlR3/view?usp=drive_link
-
-
-
-
 
 
 ## 🏗️ Architecture
