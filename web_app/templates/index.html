@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Brief Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔬 Research Brief Generator</h1>
+            <p class="subtitle">AI-Powered Research Briefs using LangGraph & Gemini 1.5 Flash</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Research Form -->
+            <div class="research-form-container">
+                <form id="research-form" class="research-form">
+                    <div class="form-group">
+                        <label for="topic">Research Topic</label>
+                        <textarea 
+                            id="topic" 
+                            name="topic" 
+                            placeholder="Enter your research topic (e.g., 'Climate change impacts on agriculture', 'Artificial Intelligence in healthcare', etc.)"
+                            required
+                            maxlength="500"
+                        ></textarea>
+                        <span class="char-count">0/500</span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="depth">Research Depth</label>
+                            <select id="depth" name="depth">
+                                <option value="1">1 - Basic Overview</option>
+                                <option value="2">2 - Light Research</option>
+                                <option value="3" selected>3 - Standard Research</option>
+                                <option value="4">4 - Deep Research</option>
+                                <option value="5">5 - Comprehensive Analysis</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="follow_up" name="follow_up">
+                                <span class="checkmark"></span>
+                                Follow-up Query
+                            </label>
+                            <small class="help-text">Check if this builds on previous research</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="generate-btn" id="generate-btn">
+                        <span class="btn-text">Generate Research Brief</span>
+                        <span class="btn-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            Generating...
+                        </span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div id="progress-container" class="progress-container" style="display: none;">
+                <div class="progress-header">
+                    <h3>🚀 Generating Research Brief</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="progress-steps">
+                    <div class="step" data-step="context_summarization">
+                        <div class="step-icon">📝</div>
+                        <div class="step-text">Context Analysis</div>
+                    </div>
+                    <div class="step" data-step="planning">
+                        <div class="step-icon">🎯</div>
+                        <div class="step-text">Research Planning</div>
+                    </div>
+                    <div class="step" data-step="search">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-text">Web Search</div>
+                    </div>
+                    <div class="step" data-step="content_fetching">
+                        <div class="step-icon">📊</div>
+                        <div class="step-text">Content Analysis</div>
+                    </div>
+                    <div class="step" data-step="synthesis">
+                        <div class="step-icon">🧬</div>
+                        <div class="step-text">Synthesis</div>
+                    </div>
+                    <div class="step" data-step="post_processing">
+                        <div class="step-icon">✨</div>
+                        <div class="step-text">Finalization</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Container -->
+            <div id="results-container" class="results-container" style="display: none;">
+                <!-- Results will be populated here -->
+            </div>
+
+            <!-- Error Container -->
+            <div id="error-container" class="error-container" style="display: none;">
+                <div class="error-header">
+                    <h3>⚠️ Generation Failed</h3>
+                </div>
+                <div class="error-content">
+                    <p id="error-message"></p>
+                    <button class="retry-btn" onclick="retryGeneration()">Try Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with 💡 LangGraph, 🤖 Gemini 1.5 Flash, and ⚡ Flask</p>
+            <div class="footer-links">
+                <a href="/health" target="_blank">Health Check</a> | 
+                <a href="/config" target="_blank">Configuration</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

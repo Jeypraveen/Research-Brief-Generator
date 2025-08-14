@@ -1,0 +1,60 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CLI: Generate Brief",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "args": ["--topic", "Artificial Intelligence in Healthcare", "--depth", "3", "--verbose"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Web App: Flask",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "args": ["--web-app", "--port", "5000"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "API: FastAPI",
+            "type": "python", 
+            "request": "launch",
+            "program": "main.py",
+            "args": ["--api", "--port", "8000"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Health Check",
+            "type": "python",
+            "request": "launch", 
+            "program": "main.py",
+            "args": ["--health-check"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Run Tests",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": ["tests/", "-v"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

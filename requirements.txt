@@ -1,0 +1,33 @@
+# Core LangGraph and LangChain dependencies
+langgraph>=0.2.45
+langchain>=0.3.7
+langchain-core>=0.3.15
+langchain-google-genai>=2.0.5
+
+# Web framework and API
+flask>=3.0.0
+fastapi>=0.115.4
+uvicorn>=0.32.0
+
+# Data validation and processing
+pydantic>=2.10.0
+typing-extensions>=4.12.0
+
+# Web search tools
+requests>=2.32.0
+beautifulsoup4>=4.12.3
+httpx>=0.28.0
+
+# Environment and configuration
+python-dotenv>=1.0.1
+
+# Testing
+pytest>=8.3.0
+pytest-asyncio>=0.24.0
+
+# Additional utilities
+colorlog>=6.8.2
+rich>=13.9.0
+
+# Optional: For enhanced web scraping
+selenium>=4.27.0

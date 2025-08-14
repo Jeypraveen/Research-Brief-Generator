@@ -1,0 +1,33 @@
+{
+    "python.defaultInterpreter": "./venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length=100", "--ignore=E203,W503"],
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["--line-length=100"],
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "tests",
+        "-v",
+        "--tb=short"
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/node_modules": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/venv": true,
+        "*.pyc": true
+    },
+    "files.associations": {
+        ".env.example": "properties",
+        "Makefile": "makefile"
+    },
+    "editor.rulers": [100],
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    }
+}

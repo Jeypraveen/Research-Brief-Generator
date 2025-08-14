@@ -1,0 +1,15 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.debugpy", 
+        "ms-python.pylance",
+        "ms-python.flake8",
+        "ms-python.black-formatter",
+        "eamodio.gitlens",
+        "humao.rest-client",
+        "ms-python.isort",
+        "tamasfe.even-better-toml",
+        "redhat.vscode-yaml",
+        "yzhang.markdown-all-in-one"
+    ]
+}
