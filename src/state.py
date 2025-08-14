@@ -1,3 +1,6 @@
+"""
+State management for the Research Brief Generator using LangGraph.
+"""
 from typing import TypedDict, Annotated, List, Optional, Dict, Any
 from typing_extensions import NotRequired
 import operator
@@ -63,17 +66,16 @@ class ResearchBriefState(TypedDict):
     # Token usage tracking (if available)
     total_tokens_used: NotRequired[int]
     
-    # Checkpointing support
-    # Custom thread tracking (renamed from checkpoint_id)
+    # Thread ID for external tracking (not for LangGraph checkpointing)
     thread_id: NotRequired[Optional[str]]
-
     
 def create_initial_state(
     topic: str,
     depth: int = 3,
     follow_up: bool = False,
     user_id: str = "default",
-    max_retries: int = 3
+    max_retries: int = 3,
+    thread_id: Optional[str] = None
 ) -> ResearchBriefState:
     """
     Create initial state for the Research Brief workflow.
@@ -84,6 +86,7 @@ def create_initial_state(
         follow_up: Whether this is a follow-up query
         user_id: User identifier for context tracking
         max_retries: Maximum number of retries for each node
+        thread_id: Thread identifier for external tracking
         
     Returns:
         Initial state dictionary
@@ -126,8 +129,7 @@ def create_initial_state(
         node_execution_times={},
         total_processing_time=0.0,
         total_tokens_used=0,
-        thread_id=None,
-
+        thread_id=thread_id,
     )
 
 def update_node_status(state: ResearchBriefState, node_name: str, execution_time: float = 0.0) -> Dict[str, Any]:
@@ -209,4 +211,5 @@ def get_state_summary(state: ResearchBriefState) -> Dict[str, Any]:
         "search_results_count": len(state.get("search_results", [])),
         "source_summaries_count": len(state.get("source_summaries", [])),
         "has_final_brief": state.get("final_brief") is not None,
-    }
+        "thread_id": state.get("thread_id"),
+    } 
