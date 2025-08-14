@@ -4,16 +4,6 @@
 
 A sophisticated research assistant system that generates structured, evidence-linked research briefs in response to user topics. The application supports follow-up queries by summarizing prior user interactions and incorporating this context into subsequent outputs.
 
-## 🌟 Features
-
-- **🧠 AI-Powered Research**: Uses Google's Gemini 1.5 Flash model for intelligent content generation
-- **🔄 LangGraph Orchestration**: Implements a robust workflow with distinct nodes for each processing step
-- **📊 Structured Output**: All outputs follow strict schemas using Pydantic validation
-- **🔍 Web Search Integration**: Automatically searches and analyzes relevant web content
-- **💭 Context Awareness**: Supports follow-up queries with previous interaction context
-- **🌐 Multiple Interfaces**: CLI, Web UI (Flask), and REST API (FastAPI)
-- **✅ Comprehensive Testing**: Unit tests and CI/CD pipeline integration
-- **📈 Observability**: LangSmith tracing support for monitoring executions
 
 ## Video Sample for API URL with sample request and response, Click below drive link to view.
 https://drive.google.com/file/d/1ct7iF23WVR9J1nlq9y08tI6ZrCi_RlR3/view?usp=drive_link
@@ -27,6 +17,17 @@ For the latest updates and detailed documentation, visit our [GitHub repository]
 <img width="1918" height="1198" alt="Image" src="https://github.com/user-attachments/assets/a0d8bf28-fb58-4257-a309-294d22ba794b" />
 <img width="1095" height="617" alt="Image" src="https://github.com/user-attachments/assets/290ba216-bfe7-4533-846d-5c245b3e14dd" />
 ![Image](https://github.com/user-attachments/assets/8560e45b-7602-4528-a533-3da6c5c2a612)
+
+## 🌟 Features
+
+- **🧠 AI-Powered Research**: Uses Google's Gemini 1.5 Flash model for intelligent content generation
+- **🔄 LangGraph Orchestration**: Implements a robust workflow with distinct nodes for each processing step
+- **📊 Structured Output**: All outputs follow strict schemas using Pydantic validation
+- **🔍 Web Search Integration**: Automatically searches and analyzes relevant web content
+- **💭 Context Awareness**: Supports follow-up queries with previous interaction context
+- **🌐 Multiple Interfaces**: CLI, Web UI (Flask), and REST API (FastAPI)
+- **✅ Comprehensive Testing**: Unit tests and CI/CD pipeline integration
+- **📈 Observability**: LangSmith tracing support for monitoring executions
 
 
 ## 🏗️ Architecture
