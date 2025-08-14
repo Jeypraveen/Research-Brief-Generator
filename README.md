@@ -96,7 +96,29 @@ pip install -r requirements.txt
 
 # Setup environment
 cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY
+# Edit .env and add:
+GEMINI_API_KEY=your_api_key_here_from_google_ai_studio
+SERPER_API_KEY=your_serper_api_key_here
+GEMINI_MODEL=gemini-1.5-flash
+TEMPERATURE=0.7
+MAX_RETRIES=3 
+MAX_SEARCH_RESULTS=10
+SEARCH_TIMEOUT=30
+FLASK_DEBUG=False
+FLASK_HOST=0.0.0.0
+FLASK_PORT=5000
+FLASK_SECRET_KEY=your_secret_key_here_change_in_production
+FASTAPI_HOST=0.0.0.0
+FASTAPI_PORT=8000
+BRIEF_HISTORY_FILE=brief_history.json
+LANGSMITH_API_KEY=
+LANGSMITH_TRACING=true
+LANGSMITH_PROJECT=
+MAX_SEARCH_RESULTS=10
+SEARCH_TIMEOUT=30
+SERPER_SEARCH_TYPE=search
+SERPER_GL=us
+SERPER_HL=en
 ```
 
 ### 3. Quick Test
