@@ -14,6 +14,7 @@ For the latest updates and detailed documentation, visit our [GitHub repository]
 <img width="1024" height="1024" alt="Image" src="https://github.com/user-attachments/assets/c2711949-613e-4793-b8a6-1c2f960ebf75" />
 <img width="1918" height="1198" alt="Image" src="https://github.com/user-attachments/assets/b36625ee-b494-4e6e-b962-4ffec21e3456" />
 <img width="1918" height="1198" alt="Image" src="https://github.com/user-attachments/assets/83e92435-0c19-4e29-8a03-8912875767b7" />
+<img width="1917" height="1197" alt="Image" src="https://github.com/user-attachments/assets/0810d6b4-cbb7-4b31-b673-45002a9fd475" />
 <img width="1918" height="1198" alt="Image" src="https://github.com/user-attachments/assets/a0d8bf28-fb58-4257-a309-294d22ba794b" />
 <img width="1095" height="617" alt="Image" src="https://github.com/user-attachments/assets/290ba216-bfe7-4533-846d-5c245b3e14dd" />
 ![Image](https://github.com/user-attachments/assets/8560e45b-7602-4528-a533-3da6c5c2a612)
